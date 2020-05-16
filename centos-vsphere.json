@@ -15,7 +15,7 @@
     "vm-cpu-num": "1",
     "vm-mem-size": "2048",
     "vm-disk-size": "25600",
-    "iso_url": "[Local Disc 1] ISO-Linux/CentOS-8.1.1911-x86_64-boot.iso"
+    "iso_url": "[Local Disc 1] ISO-Linux/CentOS-8.1.1911-x86_64-dvd1.iso"
   },
 
   "builders": [
@@ -35,7 +35,7 @@
       "notes": "{{user `vm-note`}}",
       
       "boot_wait": "10s",
-      "boot_order": "disk,cdrom,floppy",
+      "boot_order": "disk,cdrom",
 
       "guest_os_type": "centos7_64Guest",
 
@@ -53,9 +53,10 @@
       "convert_to_template": true,
 
       "iso_paths": ["{{user `iso_url`}}"],
+      "floppy_files": [],
       "boot_command": [
         "<esc><wait>",
-        "linux inst.ks=http://raw.githubusercontent.com/joyent/mi-centos-7/master/ks.cfg<enter>"
+        "linux inst.ks=https://raw.githubusercontent.com/crossid/packer-centos-docker-standalone/master/ks.cfg<enter>"
       ]
     }
   ],
@@ -64,7 +65,7 @@
     {
       "type": "shell",
       "inline": [
-        "sudo yum install -y cloud-init"
+        "sudo ls -al"
       ]
     }
   ]
